@@ -1,0 +1,40 @@
+{
+  "nodes": [
+    {
+      "id": "cron",
+      "type": "cron",
+      "name": "Check Buffer",
+      "parameters": {
+        "schedule": {
+          "rules": [
+            {
+              "frequency": "hourly",
+              "interval": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "buffer_watcher",
+      "type": "executeCommand",
+      "name": "Run Buffer Watcher",
+      "parameters": {
+        "command": "python3 scripts/buffer_watcher.py"
+      }
+    }
+  ],
+  "connections": {
+    "cron": {
+      "main": [
+        [
+          {
+            "node": "Run Buffer Watcher",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

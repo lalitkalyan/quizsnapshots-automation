@@ -1,0 +1,13 @@
+# Templates for video titles, descriptions and tags.
+
+title_template: "{flag} {topic}: {num_questions} Quick Questions to Test Your {category} IQ {emoji}"
+
+description_template: |
+  Test your knowledge with our quick quiz! This video contains {num_questions} questions about {topic}. See how many you can answer correctly.\n\n
+  —\n\n
+  Follow Quiz Snapshots for daily trivia. #quiz #trivia {hashtags}
+
+hashtags:
+  - quiz
+  - trivia
+  - knowledge

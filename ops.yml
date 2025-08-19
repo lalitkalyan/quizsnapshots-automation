@@ -1,0 +1,20 @@
+# Operational settings for the Quiz Snapshots automation pipeline
+buffer:
+  # Minimum number of READY items before triggering a refill
+  low_watermark: 6
+  # Number of READY items to target after a refill
+  target: 14
+
+approvals:
+  # Require confirmation before picking a topic from the backlog
+  topic: true
+  # Require confirmation after previewing questions but before rendering
+  prerender: true
+  # Require confirmation to move a READY item into the upload queue
+  queue: true
+
+telegram:
+  # The chat ID where approval requests should be sent. Replace with your own Telegram chat ID.
+  chat_id: "REPLACE_WITH_CHAT_ID"
+  # The bot token used to send messages. This should be provided as an environment variable.
+  bot_token_env: "TELEGRAM_BOT_TOKEN"

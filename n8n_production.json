@@ -1,0 +1,25 @@
+{
+  "nodes": [
+    {"id": "start", "type": "cron", "name": "Start Production", "parameters": {"schedule": {"rules": [{"frequency": "daily"}]}}},
+    {"id": "propose_topic", "type": "executeCommand", "name": "Propose Topic", "parameters": {"command": "python3 scripts/propose_topic.py"}},
+    {"id": "generate_questions", "type": "executeCommand", "name": "Generate Questions", "parameters": {"command": "python3 scripts/gen_questions.py --topic PLACEHOLDER --out tmp/questions.jsonl"}},
+    {"id": "preview_approval", "type": "executeCommand", "name": "Preview Approval", "parameters": {"command": "python3 scripts/preview_approval.py --questions tmp/questions.jsonl"}},
+    {"id": "factcheck", "type": "executeCommand", "name": "Fact Check", "parameters": {"command": "python3 scripts/factcheck.py --in tmp/questions.jsonl --out tmp/verified.jsonl"}},
+    {"id": "dedupe", "type": "executeCommand", "name": "De-duplicate", "parameters": {"command": "python3 scripts/dedupe.py --in tmp/verified.jsonl --bank data/questions_bank.jsonl --out tmp/deduped.jsonl"}},
+    {"id": "render", "type": "executeCommand", "name": "Render Video", "parameters": {"command": "python3 scripts/render_native.py --in tmp/deduped.jsonl --out tmp/video.mp4"}},
+    {"id": "thumbnail", "type": "executeCommand", "name": "Make Thumbnail", "parameters": {"command": "python3 scripts/make_thumbnail.py --topic PLACEHOLDER --hook \"Can you guess them?\" --out tmp/thumb.png"}},
+    {"id": "queue_approval", "type": "executeCommand", "name": "Queue Approval", "parameters": {"command": "python3 scripts/queue_approval.py"}},
+    {"id": "upload", "type": "executeCommand", "name": "Upload & Schedule", "parameters": {"command": "python3 scripts/upload_schedule.py"}}
+  ],
+  "connections": {
+    "Start Production": {"main": [[{"node": "Propose Topic", "type": "main", "index": 0}]]},
+    "Propose Topic": {"main": [[{"node": "Generate Questions", "type": "main", "index": 0}]]},
+    "Generate Questions": {"main": [[{"node": "Preview Approval", "type": "main", "index": 0}]]},
+    "Preview Approval": {"main": [[{"node": "Fact Check", "type": "main", "index": 0}]]},
+    "Fact Check": {"main": [[{"node": "De-duplicate", "type": "main", "index": 0}]]},
+    "De-duplicate": {"main": [[{"node": "Render Video", "type": "main", "index": 0}]]},
+    "Render Video": {"main": [[{"node": "Make Thumbnail", "type": "main", "index": 0}]]},
+    "Make Thumbnail": {"main": [[{"node": "Queue Approval", "type": "main", "index": 0}]]},
+    "Queue Approval": {"main": [[{"node": "Upload & Schedule", "type": "main", "index": 0}]]}
+  }
+}

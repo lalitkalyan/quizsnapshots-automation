@@ -1,0 +1,24 @@
+# Visual identity and timing rules for the native renderer.
+
+typography:
+  # Font sizes for question and answer options (in px)
+  question_font_size: 64
+  option_font_size: 56
+  hint_font_size: 36
+
+colors:
+  # Primary color palette (hex values)
+  background: "#0D0D0D"         # dark background for high contrast
+  text_primary: "#FFFFFF"       # primary text color
+  text_secondary: "#CCCCCC"     # secondary text color
+  correct_option: "#00C49A"    # green for the correct answer reveal
+  wrong_option: "#FF4C4C"      # red for wrong answers
+
+short:
+  # Duration of the countdown timer per question (in seconds)
+  timer_seconds: 7
+  # Hard limits on the total video length (in seconds)
+  min_duration_sec: 45
+  max_duration_sec: 59
+  # Animation pacing
+  transition_ms: 200

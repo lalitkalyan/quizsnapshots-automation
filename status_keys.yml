@@ -1,0 +1,12 @@
+# Definition of state names used throughout the pipeline.
+
+states:
+  - PLANNED        # Topic exists in publish_queue.csv but not yet approved
+  - APPROVED_TOPIC # Topic approved by the user for generation
+  - VERIFIED       # Questions generated, fact-checked and deduplicated
+  - READY          # Rendered video and thumbnail ready for final approval
+  - IN_QUEUE       # Approved for upload/scheduling but not yet published
+  - PUBLISHED      # Successfully uploaded and scheduled
+
+# Which states should be counted towards the buffer
+buffer_counts: READY
